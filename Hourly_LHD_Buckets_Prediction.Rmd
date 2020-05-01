@@ -1,5 +1,5 @@
 ---
-title: "KDM Hourly LHD Buckets Prediction Project"
+title: "KDM Hourly LHD loading Prediction Project"
 output:
   html_document:
     df_print: paged
@@ -9,7 +9,7 @@ output:
 
 #### 1.1 Project description
 
-Koffiefontein Diamond Mine (KDM) is a three tier sublevel cave operation based in the Free state province, SOuth Africa. The idea of this project was to utilise the data that is available at the operation and fit supervised regression models on the dielineated exogenous variables. After the optimal model was selected, the prediciton algorithm was implemented into production. The endogenous predicitons and the exogenous variables were then displyed in the control room and on management dashboards so that process control could be applied.    
+Koffiefontein Diamond Mine (KDM) is a three tier sublevel cave operation based in the Free state province, South Africa. The idea of this project was to utilise the data that is available at the operation and fit supervised regression models on the delineated exogenous variables. After the optimal model was selected, the prediciton algorithm was implemented into production. The endogenous predicitons and the exogenous variables were then displayed in the control room and on management dashboards so that process control could be applied.    
 
 #### 1.2 Objectives discussed in this document
 
@@ -82,6 +82,7 @@ dfPairs <- df[,2:11]
 dfPairs.cor<-cor(dfPairs)
 corrplot(dfPairs.cor,method="number")
 ```
+
 
 ```{r echo=TRUE}
 # Load required libraries
@@ -253,7 +254,7 @@ Specific_day <- KDMTestCSV %>%
   # Gather Buckets and pred2 into a column named value with key valuetype
   gather(key = valuetype, value = value, Buckets, pred2) %>%
   # Filter for rows 
-  filter(Instant < 11*24 & Instant > 9*24)
+  filter(Instant <= 10*24 & Instant > 9*24)
 
 #Plot predictions and Buckets by date/time 
 ggplot(Specific_day, aes(x = Instant, y = value, color = valuetype, linetype = valuetype)) + 
