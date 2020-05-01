@@ -1,6 +1,8 @@
 ---
 title: "KDM Hourly LHD Buckets Prediction Project"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 
 ### 1. Document Overview
@@ -65,8 +67,6 @@ KDMTrainCSV <- read.csv("~/GitHub/R/DataSets/KDMTrainCSV.csv")
 str(KDMTrainCSV)
 summary(KDMTrainCSV)
 ```
-
-
 
 
 
