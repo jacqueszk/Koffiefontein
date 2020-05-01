@@ -1776,6 +1776,9 @@ summary {
 <h4>1.5 Sublevel cave</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxua25pdHI6OmluY2x1ZGVfZ3JhcGhpY3MoXCJLRE0gTGV2ZWxzLkpQR1wiKVxuYGBgIn0= -->
+<pre class="r"><code>knitr::include_graphics(&quot;KDM Levels.JPG&quot;)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1784,7 +1787,7 @@ summary {
 <h3>2. Methodology</h3>
 <div id="delineate-variables" class="section level4">
 <h4>2.1 Delineate variables</h4>
-<p>Hourly data for February and March 2020</p>
+<p>Hourly data for February and March 2020:</p>
 <ul>
 <li>Hour</li>
 <li>Day of week</li>
@@ -1806,11 +1809,65 @@ summary {
 </div>
 <div id="data-preperation" class="section level4">
 <h4>2.3 Data preperation</h4>
+<p>Prepared in SQL using:</p>
+<pre><code>- Loading data table from underground LHD monitoring system 
+- Employee scanner clocking System</code></pre>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuS0RNVHJhaW5DU1YgPC0gcmVhZC5jc3YoXCJ+L0dpdEh1Yi9SL0RhdGFTZXRzL0tETVRyYWluQ1NWLmNzdlwiKVxuaGVhZChLRE1UcmFpbkNTVilcbmBgYCJ9 -->
+<pre class="r"><code>KDMTrainCSV &lt;- read.csv(&quot;~/GitHub/R/DataSets/KDMTrainCSV.csv&quot;)
+head(KDMTrainCSV)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6MTEsIm5yb3ciOjZ9LCJyZGYiOiJINHNJQUFBQUFBQUFCcTFUelU3Q1FCQmVDbTJoQkRTUmgrQkNGUXpFQzZsUmpKaVlhTGpBd2N0YVZpWFV0dWxQVkU2K2dRL2gzWWZ3SlV3NEdPQUp2T2dSblcxM2E5bkV4RVNiZk4zNXZwblptZGx0ZTUzQnRqYlFFRUpabEZVQU1waEkyVCt0TjVvTmhISVNzQXpLb1FKZGJ5RnFBNHdpb0VURElpZENVcFFPMFFDWjZkeXYvZ0R1NXpGNUFDMmlDZnZuR1JmQi9mekpwa0Q3S0F2KzN6NHJlY1liVzE4cmsvbmhVOFZZMFBka2JzeVlQbzM1ZjlWTDZzN2VueC9PcWgvR3RPMCt2bWp0cE40Q1ZIRDlvVjc2M09pNkNhZ0Rxb0JkNGNKbEcxOFRINHgxUkE4OUZ0VWoydyt3SFhEYUoyVGN3WGVNNXJwTzZERzdjT0lTRHdlTzUzUG5jYmZEYlhuUWJPbjliN0tqSDZSSkx5R3RyWlFIQ005UjkwSnpUQUpmNkxuZ09UYzY3NXNPSzkwbnc2NE9aMXJZNThOeFVSdmlBT3NYSHVRRFd3b3BxdU1HSThlR0pJbitCcktRblBFRVlTMjBhU2ZEbW5rVjJ1TmFBOFdmZDRhaHhGWWxaUmZqa3RJbjIwcG1XeW5Fdmh6WmhQZHU0WE5pTVZLR2lhT0JkZGNiSmZlaWdlcnJnUk5nSHFlWmpzV1ZhRGEwL0FMK2ZIa1EvZ01BQUE9PSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Instant"],"name":[1],"type":["int"],"align":["right"]},{"label":["WeekDay"],"name":[2],"type":["int"],"align":["right"]},{"label":["Hour"],"name":[3],"type":["int"],"align":["right"]},{"label":["Operators"],"name":[4],"type":["int"],"align":["right"]},{"label":["LHDs"],"name":[5],"type":["int"],"align":["right"]},{"label":["X56.W"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["X58.E"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["X58.R"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["X60.E"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["X60.W"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["Buckets"],"name":[11],"type":["int"],"align":["right"]}],"data":[{"1":"1","2":"7","3":"6","4":"8","5":"0","6":"0","7":"0.00","8":"0","9":"0.00","10":"0","11":"0","_rn_":"1"},{"1":"2","2":"7","3":"7","4":"11","5":"0","6":"0","7":"1.00","8":"0","9":"0.00","10":"0","11":"6","_rn_":"2"},{"1":"3","2":"7","3":"8","4":"11","5":"3","6":"0","7":"0.47","8":"0","9":"0.53","10":"0","11":"47","_rn_":"3"},{"1":"4","2":"7","3":"9","4":"11","5":"3","6":"0","7":"0.59","8":"0","9":"0.41","10":"0","11":"49","_rn_":"4"},{"1":"5","2":"7","3":"10","4":"11","5":"3","6":"0","7":"0.50","8":"0","9":"0.50","10":"0","11":"40","_rn_":"5"},{"1":"6","2":"7","3":"11","4":"11","5":"4","6":"0","7":"0.42","8":"0","9":"0.58","10":"0","11":"64","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10],"total":[11]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyKEtETVRyYWluQ1NWKVxuYGBgIn0= -->
+<pre class="r"><code>str(KDMTrainCSV)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiJ2RhdGEuZnJhbWUnOlx0Njk2IG9icy4gb2YgIDExIHZhcmlhYmxlczpcbiAkIEluc3RhbnQgIDogaW50ICAxIDIgMyA0IDUgNiA3IDggOSAxMCAuLi5cbiAkIFdlZWtEYXkgIDogaW50ICA3IDcgNyA3IDcgNyA3IDcgNyA3IC4uLlxuICQgSG91ciAgICAgOiBpbnQgIDYgNyA4IDkgMTAgMTEgMTIgMTMgMTQgMTUgLi4uXG4gJCBPcGVyYXRvcnM6IGludCAgOCAxMSAxMSAxMSAxMSAxMSAxMSAxMSA1IDMgLi4uXG4gJCBMSERzICAgICA6IGludCAgMCAwIDMgMyAzIDQgMiAwIDAgMCAuLi5cbiAkIFg1Ni5XICAgIDogbnVtICAwIDAgMCAwIDAgMCAwIDAgMCAwIC4uLlxuICQgWDU4LkUgICAgOiBudW0gIDAgMSAwLjQ3IDAuNTkgMC41IDAuNDIgMCAwIDAgMCAuLi5cbiAkIFg1OC5SICAgIDogbnVtICAwIDAgMCAwIDAgMCAwIDAgMCAwIC4uLlxuICQgWDYwLkUgICAgOiBudW0gIDAgMCAwLjUzIDAuNDEgMC41IDAuNTggMSAwIDAgMCAuLi5cbiAkIFg2MC5XICAgIDogbnVtICAwIDAgMCAwIDAgMCAwIDAgMCAwIC4uLlxuICQgQnVja2V0cyAgOiBpbnQgIDAgNiA0NyA0OSA0MCA2NCAxNSAwIDAgMCAuLi5cbiJ9 -->
+<pre><code>&#39;data.frame&#39;:   696 obs. of  11 variables:
+ $ Instant  : int  1 2 3 4 5 6 7 8 9 10 ...
+ $ WeekDay  : int  7 7 7 7 7 7 7 7 7 7 ...
+ $ Hour     : int  6 7 8 9 10 11 12 13 14 15 ...
+ $ Operators: int  8 11 11 11 11 11 11 11 5 3 ...
+ $ LHDs     : int  0 0 3 3 3 4 2 0 0 0 ...
+ $ X56.W    : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ X58.E    : num  0 1 0.47 0.59 0.5 0.42 0 0 0 0 ...
+ $ X58.R    : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ X60.E    : num  0 0 0.53 0.41 0.5 0.58 1 0 0 0 ...
+ $ X60.W    : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ Buckets  : int  0 6 47 49 40 64 15 0 0 0 ...</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShLRE1UcmFpbkNTVilcbmBgYCJ9 -->
+<pre class="r"><code>summary(KDMTrainCSV)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgIEluc3RhbnQgICAgICAgICBXZWVrRGF5ICAgICAgICAgICBIb3VyICAgICAgICAgT3BlcmF0b3JzICAgICAgICAgIExIRHMgICAgICAgICAgIFg1Ni5XICAgICAgIFxuIE1pbi4gICA6ICAxLjAgICBNaW4uICAgOjEuMDAwICAgTWluLiAgIDogMC4wMCAgIE1pbi4gICA6IDAuMDAgICBNaW4uICAgOjAuMDAwICAgTWluLiAgIDowLjAwMDAgIFxuIDFzdCBRdS46MTc0LjggICAxc3QgUXUuOjIuMDAwICAgMXN0IFF1LjogNS43NSAgIDFzdCBRdS46IDguNzUgICAxc3QgUXUuOjAuMDAwICAgMXN0IFF1LjowLjAwMDAgIFxuIE1lZGlhbiA6MzQ4LjUgICBNZWRpYW4gOjQuMDAwICAgTWVkaWFuIDoxMS41MCAgIE1lZGlhbiA6MTIuMDAgICBNZWRpYW4gOjIuMDAwICAgTWVkaWFuIDowLjAwMDAgIFxuIE1lYW4gICA6MzQ4LjUgICBNZWFuICAgOjQuMDUyICAgTWVhbiAgIDoxMS41MCAgIE1lYW4gICA6MTAuMTUgICBNZWFuICAgOjEuOTM3ICAgTWVhbiAgIDowLjE0MDYgIFxuIDNyZCBRdS46NTIyLjIgICAzcmQgUXUuOjYuMDAwICAgM3JkIFF1LjoxNy4yNSAgIDNyZCBRdS46MTMuMDAgICAzcmQgUXUuOjMuMDAwICAgM3JkIFF1LjowLjE5MDAgIFxuIE1heC4gICA6Njk2LjAgICBNYXguICAgOjcuMDAwICAgTWF4LiAgIDoyMy4wMCAgIE1heC4gICA6MjIuMDAgICBNYXguICAgOjYuMDAwICAgTWF4LiAgIDoxLjAwMDAgIFxuICAgICBYNTguRSAgICAgICAgICAgIFg1OC5SICAgICAgICAgICAgIFg2MC5FICAgICAgICAgICAgWDYwLlcgICAgICAgICAgICBCdWNrZXRzICAgICBcbiBNaW4uICAgOjAuMDAwMCAgIE1pbi4gICA6MC4wMDAwMCAgIE1pbi4gICA6MC4wMDAwICAgTWluLiAgIDowLjAwMDAwICAgTWluLiAgIDogMC4wMCAgXG4gMXN0IFF1LjowLjAwMDAgICAxc3QgUXUuOjAuMDAwMDAgICAxc3QgUXUuOjAuMDAwMCAgIDFzdCBRdS46MC4wMDAwMCAgIDFzdCBRdS46IDAuMDAgIFxuIE1lZGlhbiA6MC4wMDAwICAgTWVkaWFuIDowLjAwMDAwICAgTWVkaWFuIDowLjMzMDAgICBNZWRpYW4gOjAuMDAwMDAgICBNZWRpYW4gOjEwLjAwICBcbiBNZWFuICAgOjAuMTIwOSAgIE1lYW4gICA6MC4wMjc4NCAgIE1lYW4gICA6MC4zNjE4ICAgTWVhbiAgIDowLjA0NDM3ICAgTWVhbiAgIDoxNS4wNyAgXG4gM3JkIFF1LjowLjE3MDAgICAzcmQgUXUuOjAuMDAwMDAgICAzcmQgUXUuOjAuNzAwMCAgIDNyZCBRdS46MC4wMDAwMCAgIDNyZCBRdS46MjQuMjUgIFxuIE1heC4gICA6MS4wMDAwICAgTWF4LiAgIDoxLjAwMDAwICAgTWF4LiAgIDoxLjAwMDAgICBNYXguICAgOjEuMDAwMDAgICBNYXguICAgOjc3LjAwICBcbiJ9 -->
+<pre><code>    Instant         WeekDay           Hour         Operators          LHDs           X56.W       
+ Min.   :  1.0   Min.   :1.000   Min.   : 0.00   Min.   : 0.00   Min.   :0.000   Min.   :0.0000  
+ 1st Qu.:174.8   1st Qu.:2.000   1st Qu.: 5.75   1st Qu.: 8.75   1st Qu.:0.000   1st Qu.:0.0000  
+ Median :348.5   Median :4.000   Median :11.50   Median :12.00   Median :2.000   Median :0.0000  
+ Mean   :348.5   Mean   :4.052   Mean   :11.50   Mean   :10.15   Mean   :1.937   Mean   :0.1406  
+ 3rd Qu.:522.2   3rd Qu.:6.000   3rd Qu.:17.25   3rd Qu.:13.00   3rd Qu.:3.000   3rd Qu.:0.1900  
+ Max.   :696.0   Max.   :7.000   Max.   :23.00   Max.   :22.00   Max.   :6.000   Max.   :1.0000  
+     X58.E            X58.R             X60.E            X60.W            Buckets     
+ Min.   :0.0000   Min.   :0.00000   Min.   :0.0000   Min.   :0.00000   Min.   : 0.00  
+ 1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.: 0.00  
+ Median :0.0000   Median :0.00000   Median :0.3300   Median :0.00000   Median :10.00  
+ Mean   :0.1209   Mean   :0.02784   Mean   :0.3618   Mean   :0.04437   Mean   :15.07  
+ 3rd Qu.:0.1700   3rd Qu.:0.00000   3rd Qu.:0.7000   3rd Qu.:0.00000   3rd Qu.:24.25  
+ Max.   :1.0000   Max.   :1.00000   Max.   :1.0000   Max.   :1.00000   Max.   :77.00  </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIktETSBIb3VybHkgTEhEIEJ1Y2tldHMgUHJlZGljdGlvbiBQcm9qZWN0Ig0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KIyMjIDEuIERvY3VtZW50IE92ZXJ2aWV3DQoNCiMjIyMgMS4xIFByb2plY3QgZGVzY3JpcHRpb24NCg0KS29mZmllZm9udGVpbiBEaWFtb25kIE1pbmUgKEtETSkgaXMgYSB0aHJlZSB0aWVyIHN1YmxldmVsIGNhdmUgb3BlcmF0aW9uIGJhc2VkIGluIHRoZSBGcmVlIHN0YXRlIHByb3ZpbmNlLCBTT3V0aCBBZnJpY2EuIFRoZSBpZGVhIG9mIHRoaXMgcHJvamVjdCB3YXMgdG8gdXRpbGlzZSB0aGUgZGF0YSB0aGF0IGlzIGF2YWlsYWJsZSBhdCB0aGUgb3BlcmF0aW9uIGFuZCBmaXQgc3VwZXJ2aXNlZCByZWdyZXNzaW9uIG1vZGVscyBvbiB0aGUgZGllbGluZWF0ZWQgZXhvZ2Vub3VzIHZhcmlhYmxlcy4gQWZ0ZXIgdGhlIG9wdGltYWwgbW9kZWwgd2FzIHNlbGVjdGVkLCB0aGUgcHJlZGljaXRvbiBhbGdvcml0aG0gd2FzIGltcGxlbWVudGVkIGludG8gcHJvZHVjdGlvbi4gVGhlIGVuZG9nZW5vdXMgcHJlZGljaXRvbnMgYW5kIHRoZSBleG9nZW5vdXMgdmFyaWFibGVzIHdlcmUgdGhlbiBkaXNwbHllZCBpbiB0aGUgY29udHJvbCByb29tIGFuZCBvbiBtYW5hZ2VtZW50IGRhc2hib2FyZHMgc28gdGhhdCBwcm9jZXNzIGNvbnRyb2wgY291bGQgYmUgYXBwbGllZC4gICAgDQoNCiMjIyMgMS4yIE9iamVjdGl2ZXMgZGlzY3Vzc2VkIGluIHRoaXMgZG9jdW1lbnQNCg0KKiBEZWxpbmVhdGUgYmVzdCBtb2RlbCB0aGF0IG1pbmltaXNlcyB0aGUgUm9vdCBNZWFuIFNxdWFyZWQgRXJyb3IgKFJNU0UpLg0KKiBQdXQgbW9kZWwgaW50byBwcm9kdWN0aW9uIHVzaW5nIHJlYWwtdGltZSBkYXRhIHNvIHRoYXQgcmVsZXZhbnQgc3Rha2hvbGRlcnMgaGF2ZSBzaWdodCBvbiBob3VybHkgcHJlZGljdGlvbiAgZm9yIHRoZSByZW1haW5pbmcgc2hpZnQgYW5kIHByb2R1Y3Rpb24gZGF5Lg0KDQojIyMjIDEuMyBBc3N1bXB0aW9uDQoNCiogVGhlIGRhdGEgb24gdGhlIG9uLW1pbmUgc2VydmVycyBhcmUgb2YgYWNjZXB0YWJsZSBxdWFsaXR5Lg0KDQojIyMjIDEuNCBQYWNrYWdlcyB1dGlsaWlzZWQNCg0KdGlkeXIsIGNhcmV0LCByYW5nZXIsIHZ0cmVhdCwgeGdib29zdCwgbWFncml0dHIsIGdncGxvdDIsIGRwbHlyLCBicm9vbSwga25pdHINCg0KIyMjIyAxLjUgU3VibGV2ZWwgY2F2ZQ0KDQoNCmBgYHtyIGVjaG89RkFMU0V9DQprbml0cjo6aW5jbHVkZV9ncmFwaGljcygiS0RNIExldmVscy5KUEciKQ0KYGBgDQoNCg0KIyMjIDIuIE1ldGhvZG9sb2d5DQoNCiMjIyMgMi4xIERlbGluZWF0ZSB2YXJpYWJsZXMNCg0KSG91cmx5IGRhdGEgZm9yIEZlYnJ1YXJ5IGFuZCBNYXJjaCAyMDIwDQogDQoqIEhvdXINCiogRGF5IG9mIHdlZWsNCiogTnVtYmVyIG9mIG9wZXJhdG9ycyB1bmRlcmdyb3VuZA0KKiBOdW1iZXIgb2YgTEhEcyBMb2FkaW5nDQoqIDU2IGxldmVsIFdlc3Qgb3JpZW50YXRpb24gbG9hZGluZyBwZXJjZW50YWdlDQoqIDU4IGxldmVsIEVhc3Qgb3JpZW50YXRpb24gbG9hZGluZyBwZXJjZW50YWdlDQoqIDU4IGxldmVsIFJMVCBvcmllbnRhdGlvbiBsb2FkaW5nIHBlcmNlbnRhZ2UNCiogNjAgbGV2ZWwgRWFzdCBvcmllbnRhdGlvbiBsb2FkaW5nIHBlcmNlbnRhZ2UNCiogNjAgbGV2ZWwgV2VzdCBvcmllbnRhdGlvbiBsb2FkaW5nIHBlcmNlbnRhZ2UNCiogT3JlIHBhc3MgbGV2ZWxzIChOb3QgYXZhaWxhYmxlKQ0KDQojIyMjIDIuMiBFbmRvZ2Vub3VzIHZhcmFyaWFibGUNCg0KKiBCdWNrZXRzIGJ5IGhvdXINCg0KIyMjIyAyLjMgRGF0YSBwcmVwZXJhdGlvbg0KDQoNCg0KDQoNCg0KDQoNCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIktETSBIb3VybHkgTEhEIEJ1Y2tldHMgUHJlZGljdGlvbiBQcm9qZWN0Ig0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KIyMjIDEuIERvY3VtZW50IE92ZXJ2aWV3DQoNCiMjIyMgMS4xIFByb2plY3QgZGVzY3JpcHRpb24NCg0KS29mZmllZm9udGVpbiBEaWFtb25kIE1pbmUgKEtETSkgaXMgYSB0aHJlZSB0aWVyIHN1YmxldmVsIGNhdmUgb3BlcmF0aW9uIGJhc2VkIGluIHRoZSBGcmVlIHN0YXRlIHByb3ZpbmNlLCBTT3V0aCBBZnJpY2EuIFRoZSBpZGVhIG9mIHRoaXMgcHJvamVjdCB3YXMgdG8gdXRpbGlzZSB0aGUgZGF0YSB0aGF0IGlzIGF2YWlsYWJsZSBhdCB0aGUgb3BlcmF0aW9uIGFuZCBmaXQgc3VwZXJ2aXNlZCByZWdyZXNzaW9uIG1vZGVscyBvbiB0aGUgZGllbGluZWF0ZWQgZXhvZ2Vub3VzIHZhcmlhYmxlcy4gQWZ0ZXIgdGhlIG9wdGltYWwgbW9kZWwgd2FzIHNlbGVjdGVkLCB0aGUgcHJlZGljaXRvbiBhbGdvcml0aG0gd2FzIGltcGxlbWVudGVkIGludG8gcHJvZHVjdGlvbi4gVGhlIGVuZG9nZW5vdXMgcHJlZGljaXRvbnMgYW5kIHRoZSBleG9nZW5vdXMgdmFyaWFibGVzIHdlcmUgdGhlbiBkaXNwbHllZCBpbiB0aGUgY29udHJvbCByb29tIGFuZCBvbiBtYW5hZ2VtZW50IGRhc2hib2FyZHMgc28gdGhhdCBwcm9jZXNzIGNvbnRyb2wgY291bGQgYmUgYXBwbGllZC4gICAgDQoNCiMjIyMgMS4yIE9iamVjdGl2ZXMgZGlzY3Vzc2VkIGluIHRoaXMgZG9jdW1lbnQNCg0KKiBEZWxpbmVhdGUgYmVzdCBtb2RlbCB0aGF0IG1pbmltaXNlcyB0aGUgUm9vdCBNZWFuIFNxdWFyZWQgRXJyb3IgKFJNU0UpLg0KKiBQdXQgbW9kZWwgaW50byBwcm9kdWN0aW9uIHVzaW5nIHJlYWwtdGltZSBkYXRhIHNvIHRoYXQgcmVsZXZhbnQgc3Rha2hvbGRlcnMgaGF2ZSBzaWdodCBvbiBob3VybHkgcHJlZGljdGlvbiAgZm9yIHRoZSByZW1haW5pbmcgc2hpZnQgYW5kIHByb2R1Y3Rpb24gZGF5Lg0KDQojIyMjIDEuMyBBc3N1bXB0aW9uDQoNCiogVGhlIGRhdGEgb24gdGhlIG9uLW1pbmUgc2VydmVycyBhcmUgb2YgYWNjZXB0YWJsZSBxdWFsaXR5Lg0KDQojIyMjIDEuNCBQYWNrYWdlcyB1dGlsaWlzZWQNCg0KdGlkeXIsIGNhcmV0LCByYW5nZXIsIHZ0cmVhdCwgeGdib29zdCwgbWFncml0dHIsIGdncGxvdDIsIGRwbHlyLCBicm9vbSwga25pdHINCg0KIyMjIyAxLjUgU3VibGV2ZWwgY2F2ZQ0KDQoNCmBgYHtyIGVjaG89VFJVRX0NCmtuaXRyOjppbmNsdWRlX2dyYXBoaWNzKCJLRE0gTGV2ZWxzLkpQRyIpDQpgYGANCg0KDQoNCiMjIyAyLiBNZXRob2RvbG9neQ0KDQojIyMjIDIuMSBEZWxpbmVhdGUgdmFyaWFibGVzDQoNCkhvdXJseSBkYXRhIGZvciBGZWJydWFyeSBhbmQgTWFyY2ggMjAyMDoNCiANCiogSG91cg0KKiBEYXkgb2Ygd2Vlaw0KKiBOdW1iZXIgb2Ygb3BlcmF0b3JzIHVuZGVyZ3JvdW5kDQoqIE51bWJlciBvZiBMSERzIExvYWRpbmcNCiogNTYgbGV2ZWwgV2VzdCBvcmllbnRhdGlvbiBsb2FkaW5nIHBlcmNlbnRhZ2UNCiogNTggbGV2ZWwgRWFzdCBvcmllbnRhdGlvbiBsb2FkaW5nIHBlcmNlbnRhZ2UNCiogNTggbGV2ZWwgUkxUIG9yaWVudGF0aW9uIGxvYWRpbmcgcGVyY2VudGFnZQ0KKiA2MCBsZXZlbCBFYXN0IG9yaWVudGF0aW9uIGxvYWRpbmcgcGVyY2VudGFnZQ0KKiA2MCBsZXZlbCBXZXN0IG9yaWVudGF0aW9uIGxvYWRpbmcgcGVyY2VudGFnZQ0KKiBPcmUgcGFzcyBsZXZlbHMgKE5vdCBhdmFpbGFibGUpDQoNCiMjIyMgMi4yIEVuZG9nZW5vdXMgdmFyYXJpYWJsZQ0KDQoqIEJ1Y2tldHMgYnkgaG91cg0KDQojIyMjIDIuMyBEYXRhIHByZXBlcmF0aW9uDQoNClByZXBhcmVkIGluIFNRTCB1c2luZzoNCg0KCS0gTG9hZGluZyBkYXRhIHRhYmxlIGZyb20gdW5kZXJncm91bmQgTEhEIG1vbml0b3Jpbmcgc3lzdGVtIA0KCS0gRW1wbG95ZWUgc2Nhbm5lciBjbG9ja2luZyBTeXN0ZW0NCg0KDQpgYGB7ciBlY2hvPVRSVUV9DQpLRE1UcmFpbkNTViA8LSByZWFkLmNzdigifi9HaXRIdWIvUi9EYXRhU2V0cy9LRE1UcmFpbkNTVi5jc3YiKQ0Kc3RyKEtETVRyYWluQ1NWKQ0Kc3VtbWFyeShLRE1UcmFpbkNTVikNCmBgYA0KDQoNCg0KDQoNCg0KDQoNCg==</div>
 
 
 

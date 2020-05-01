@@ -25,16 +25,17 @@ tidyr, caret, ranger, vtreat, xgboost, magrittr, ggplot2, dplyr, broom, knitr
 #### 1.5 Sublevel cave
 
 
-```{r echo=FALSE}
+```{r echo=TRUE}
 knitr::include_graphics("KDM Levels.JPG")
 ```
+
 
 
 ### 2. Methodology
 
 #### 2.1 Delineate variables
 
-Hourly data for February and March 2020
+Hourly data for February and March 2020:
  
 * Hour
 * Day of week
@@ -53,6 +54,17 @@ Hourly data for February and March 2020
 
 #### 2.3 Data preperation
 
+Prepared in SQL using:
+
+	- Loading data table from underground LHD monitoring system 
+	- Employee scanner clocking System
+
+
+```{r echo=TRUE}
+KDMTrainCSV <- read.csv("~/GitHub/R/DataSets/KDMTrainCSV.csv")
+str(KDMTrainCSV)
+summary(KDMTrainCSV)
+```
 
 
 
