@@ -9,19 +9,19 @@ output:
 
 #### 1.1 Project description
 
-Koffiefontein Diamond Mine (KDM) is a three tier sublevel cave operation based in the Free state province, South Africa. The idea of this project was to utilise the data that is available at the operation and fit supervised regression models on the delineated exogenous variables. After the optimal model was selected, the prediciton algorithm was implemented into production. The endogenous predicitons and the exogenous variables were then displayed in the control room and on management dashboards so that process control could be applied.    
+Koffiefontein Diamond Mine (KDM) is a three tier sublevel cave operation based in the Free state province, South Africa. The idea of this project was to utilise the data that is available at the operation and fit supervised regression models on the delineated exogenous variables. After the optimal model was selected, the prediction algorithm was implemented into production. The endogenous predictions and the exogenous variables were then displayed in the control room and on management dashboards so that process control could be applied.    
 
 #### 1.2 Objectives discussed in this document
 
 * Delineate best model that minimises the Root Mean Squared Error (RMSE).
-* Put model into production using real-time data so that relevant stakholders have sight on hourly prediction  for the remaining shift and production day.
+* Put model into production using real-time data so that relevant stakeholders have sight on hourly prediction  for the remaining shift and production day.
 
 #### 1.3 Assumption
 
 * The data on the on-mine servers are of acceptable quality.
 * Reader of this document has basic understanding of supervised learning and why these standard regression models were used 
 
-#### 1.4 Packages utiliised
+#### 1.4 Packages utilised
 
 tidyr, caret, ranger, vtreat, xgboost, magrittr, ggplot2, dplyr, broom, knitr, rmarkdown
 
@@ -52,11 +52,11 @@ Hourly data for February and March 2020:
 * 60 level West orientation loading percentage
 * Ore pass levels (Not available)
 
-#### 2.2 Endogenous varariable
+#### 2.2 Endogenous variable
 
 * Buckets by hour
 
-#### 2.3 Data preperation
+#### 2.3 Data preparation
 
 Prepared in SQL using:
 
@@ -272,9 +272,9 @@ ggplot(Specific_day, aes(x = Instant, y = value, color = valuetype, linetype = v
 ### 3 Conclusion and work required (20200501)
 
 
-The model that has been elicited makes it possible to predict on hourly data. It will be put into production using SQLMachine learning services. The current hour's prediciton will be based on the real-time quanities of the exogenous variables. 
+The model that has been elicited makes it possible to predict on hourly data. It will be put into production using SQLMachine learning services. The current hour's prediction will be based on the real-time quantities of the exogenous variables. 
 
-The remaining hours of the production day will be predicted using the last two rolling month's average for the quanitity of operators and the quantity of LHDs for each hour on each weekday. The percentage extraction from each level and orientation will be based on the split of the called tonnes by the planner before each production day.  
+The remaining hours of the production day will be predicted using the last two rolling month's average for the quantity of operators and the quantity of LHDs for each hour on each weekday. The percentage extraction from each level and orientation will be based on the split of the called tonnes by the planner before each production day.  
 
 
 Improvement suggestion (Perhaps at CDM):

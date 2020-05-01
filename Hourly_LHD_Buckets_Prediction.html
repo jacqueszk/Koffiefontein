@@ -1641,13 +1641,13 @@ summary {
 <h3>1. Document Overview</h3>
 <div id="project-description" class="section level4">
 <h4>1.1 Project description</h4>
-<p>Koffiefontein Diamond Mine (KDM) is a three tier sublevel cave operation based in the Free state province, South Africa. The idea of this project was to utilise the data that is available at the operation and fit supervised regression models on the delineated exogenous variables. After the optimal model was selected, the prediciton algorithm was implemented into production. The endogenous predicitons and the exogenous variables were then displayed in the control room and on management dashboards so that process control could be applied.</p>
+<p>Koffiefontein Diamond Mine (KDM) is a three tier sublevel cave operation based in the Free state province, South Africa. The idea of this project was to utilise the data that is available at the operation and fit supervised regression models on the delineated exogenous variables. After the optimal model was selected, the prediction algorithm was implemented into production. The endogenous predictions and the exogenous variables were then displayed in the control room and on management dashboards so that process control could be applied.</p>
 </div>
 <div id="objectives-discussed-in-this-document" class="section level4">
 <h4>1.2 Objectives discussed in this document</h4>
 <ul>
 <li>Delineate best model that minimises the Root Mean Squared Error (RMSE).</li>
-<li>Put model into production using real-time data so that relevant stakholders have sight on hourly prediction for the remaining shift and production day.</li>
+<li>Put model into production using real-time data so that relevant stakeholders have sight on hourly prediction for the remaining shift and production day.</li>
 </ul>
 </div>
 <div id="assumption" class="section level4">
@@ -1657,8 +1657,8 @@ summary {
 <li>Reader of this document has basic understanding of supervised learning and why these standard regression models were used</li>
 </ul>
 </div>
-<div id="packages-utiliised" class="section level4">
-<h4>1.4 Packages utiliised</h4>
+<div id="packages-utilised" class="section level4">
+<h4>1.4 Packages utilised</h4>
 <p>tidyr, caret, ranger, vtreat, xgboost, magrittr, ggplot2, dplyr, broom, knitr, rmarkdown</p>
 </div>
 <div id="sublevel-cave" class="section level4">
@@ -1686,14 +1686,14 @@ knitr::include_graphics(&quot;KDM Levels.JPG&quot;)</code></pre>
 <li>Ore pass levels (Not available)</li>
 </ul>
 </div>
-<div id="endogenous-varariable" class="section level4">
-<h4>2.2 Endogenous varariable</h4>
+<div id="endogenous-variable" class="section level4">
+<h4>2.2 Endogenous variable</h4>
 <ul>
 <li>Buckets by hour</li>
 </ul>
 </div>
-<div id="data-preperation" class="section level4">
-<h4>2.3 Data preperation</h4>
+<div id="data-preparation" class="section level4">
+<h4>2.3 Data preparation</h4>
 <p>Prepared in SQL using:</p>
 <pre><code>- Loading data table from underground LHD monitoring system 
 - Employee scanner clocking System</code></pre>
@@ -1953,8 +1953,8 @@ ggplot(Specific_day, aes(x = Instant, y = value, color = valuetype, linetype = v
 </div>
 <div id="conclusion-and-work-required-20200501" class="section level3">
 <h3>3 Conclusion and work required (20200501)</h3>
-<p>The model that has been elicited makes it possible to predict on hourly data. It will be put into production using SQLMachine learning services. The current hour’s prediciton will be based on the real-time quanities of the exogenous variables.</p>
-<p>The remaining hours of the production day will be predicted using the last two rolling month’s average for the quanitity of operators and the quantity of LHDs for each hour on each weekday. The percentage extraction from each level and orientation will be based on the split of the called tonnes by the planner before each production day.</p>
+<p>The model that has been elicited makes it possible to predict on hourly data. It will be put into production using SQLMachine learning services. The current hour’s prediction will be based on the real-time quantities of the exogenous variables.</p>
+<p>The remaining hours of the production day will be predicted using the last two rolling month’s average for the quantity of operators and the quantity of LHDs for each hour on each weekday. The percentage extraction from each level and orientation will be based on the split of the called tonnes by the planner before each production day.</p>
 <p>Improvement suggestion (Perhaps at CDM): Ore pass levels could be a significant variable to incorporate that potentially improves predictions as it is a sound representation of the ore handling system’s performance and directly impact dumping ability if full.</p>
 <p>To be implemented when production runs at 100%.</p>
 </div>
