@@ -22,7 +22,7 @@ Koffiefontein Diamond Mine (KDM) is a three tier sublevel cave operation based i
 
 #### 1.4 Packages utiliised
 
-tidyr, caret, ranger, vtreat, xgboost, magrittr, ggplot2, dplyr, broom, knitr
+tidyr, caret, ranger, vtreat, xgboost, magrittr, ggplot2, dplyr, broom, knitr, rmarkdown
 
 #### 1.5 Sublevel cave
 
