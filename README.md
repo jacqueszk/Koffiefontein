@@ -1,8 +1,12 @@
-PHP visitors tracking system
-99% accurate visitors tracking system for PHP >= 7.0
+# PHP visitors tracking system
+99% accurate visitors tracking system for PHP  >= 7.0
 
+```bash
 composer require ghostff/php-visitors-tracking
-USAGE
+```
+
+# USAGE
+```php
 $visitor = new VisitorTracking;
 
 $visitor->ip; //outputs clients IP address
@@ -24,14 +28,19 @@ $visitor->latitude; //outputs clients latitude
 $visitor->longitude; //outputs clients longitude
 $visitor->timezone; //outputs clients timezone
 $visitor->datetime; //outputs clients datetime
-Initializer __constructor(?Closure $on_fail, ?string $ip)
-$on_fail: A callback function that will be called if error occurred with IP data query.
-$ip : An explicit IP.
+```
+## Initializer ___constructor(?Closure $on_fail, ?string $ip)_
+ - `$on_fail`: A callback function that will be called if error occurred with IP data query.
+ - `$ip` : An explicit IP.
+```php
 new VisitorTracking(function (string $error) {
     var_dump($error);
 });
-Initializer __toArray()
-Returns array of all user properties.
+```
 
+## Initializer ___toArray()_ 
+Returns array of all user properties.
+```php
 $visitor = new VisitorTracking(null, '85.13.6.242');
 var_dump($visitor->__toArray());
+```
