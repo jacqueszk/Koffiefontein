@@ -296,9 +296,14 @@ The remaining hours of the production day will be predicted using the last two r
 
 ### Grade
 
-
+**Update 20200504**
+Complete, documenting in progress 
+ 
 
 ### Multivariate
+
+**Update 20200504**
+Complete,  documenting in progress 
 
 
 **Multiple multivariate regression**
@@ -308,8 +313,6 @@ Grade data lags loading data by n day
 Packages:
 MultivariateRandomForest
 IntegratedMRF
-
-
 
 
 
