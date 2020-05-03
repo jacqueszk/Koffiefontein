@@ -15,7 +15,7 @@ output:
 
 Koffiefontein Diamond Mine (KDM) is a three tier sub-level cave operation based in the Free state province, South Africa. Recent developments at the mine has led to various technological systems being implemented rendering vast amounts of data. The mine utilises business Intelligence software, which is intuitive, but more descriptive than predictive. The idea of the projects, detailed in the tabs above, were to better understand the machine learning possibilities with incumbent data availability and quality. 
  
-Predictive insights and variation of components influencing endogenous variables give on-mine decision maker a better chance of control based on historically observed data. The aim of the projects were to fit supervised regression/classification models on the applicable, delineated, exogenous variables. After the optimal models were selected, the prediction algorithms were implemented into production. The endogenous predictions and the exogenous variables were then displayed in the control room and on management dashboards for improved process control. 
+Predictive insights and variation of components influencing dependent variables give on-mine decision maker a better chance of control based on historically observed data. The aim of the projects were to fit supervised regression/classification models on the applicable, delineated, independent variables. After the optimal models were selected, the prediction algorithms were implemented into production. The dependent predictions and the independent variables were then displayed in the control room and on management dashboards for improved process control. 
 
 #### Sub-level cave
 
@@ -24,22 +24,7 @@ Predictive insights and variation of components influencing endogenous variables
 knitr::include_graphics("KDM Levels.JPG")
 ```
 
-#### Author
-**Jacques Swart** 
-
-**Email address:** Jacques.swart@petradiamonds.com 
-
-
-### Loading Prediction
-
-
-#### Objectives for this project
-
-* Delineate best model that minimises the Root Mean Square Error (RMSE).
-* Put model into production using (near) real-time data so that relevant stakeholders have sight on hourly prediction  for the remaining shift and production day.
-* Push underperfroming exogenous variables to screens for process control.
-
-#### Assumption
+#### Assumptions
 
 * Available data on the on-mine servers are of acceptable quality.
 * Reader of this document has basic understanding of supervised learning and why these regression models were used.
@@ -49,8 +34,22 @@ knitr::include_graphics("KDM Levels.JPG")
 
 tidyr, caret, ranger, vtreat, xgboost, magrittr, ggplot2, dplyr, broom, knitr, rmarkdown
 
+#### Author
+**Jacques Swart** 
 
-#### Exongenous variables
+**Email address:** Jacques.swart@petradiamonds.com 
+
+
+### Loading
+
+
+#### Objectives for this project
+
+* Delineate best model that minimises the Root Mean Square Error (RMSE).
+* Put model into production using (near) real-time data so that relevant stakeholders have sight on hourly prediction  for the remaining shift and production day.
+* Push underperfroming independent variables to screens for process control.
+
+#### Independent variables
 
 Hourly data for February and March 2020:
  
@@ -68,7 +67,7 @@ Hourly data for February and March 2020:
 * 60 level ring meters drilled past month
 * Ore pass levels (Not available)
 
-#### Endogenous variable
+#### Dependent variable
 
 * Buckets by hour
 
@@ -261,7 +260,7 @@ ggplot(first_two_weeks, aes(x = Instant, y = value, color = valuetype, linetype 
   geom_line() + 
   scale_x_continuous("Day", breaks = 0:14, labels = 0:14) + 
   scale_color_brewer(palette = "Dark2") + 
-  ggtitle("Predicted March Buckets, Random Forest plot")
+  ggtitle("Predicted Two Weeks Buckets, Random Forest plot")
 
 # Specific day: 10 March 2020
 Specific_day <- KDMTestCSV %>% 
@@ -278,22 +277,57 @@ ggplot(Specific_day, aes(x = Instant, y = value, color = valuetype, linetype = v
   geom_line() + 
   scale_x_continuous("Hour", breaks = 0:14, labels = 0:14) + 
   scale_color_brewer(palette = "Dark2") + 
-  ggtitle("Predicted 10 March Buckets, Random Forest plot")
+  ggtitle("Predicted 10 March 2020 Buckets, Random Forest plot")
 
 ```
 
 
 
-### Grade 
+
+
+
+The model that has been elicited makes it possible to predict on hourly data. It will be put into production using SQLMachine learning services. The current hour's prediction will be based on the real-time quantities of the independent variables. 
+
+The remaining hours of the production day will be predicted using the last two rolling month's average for the quantity of operators and the quantity of LHDs for each hour on each weekday. The percentage extraction from each level and orientation will be based on the split of the called tonnes by the planner before each production day. Drilling meters by level will be actuals. 
+
+
+**Performance of the model will be discussed once operations are 100% operational again** 
+
+
+### Grade
+
+
+
+### Multivariate
+
+
+**Multiple multivariate regression**
+Include grade and compliance (available from March) as dependent variables
+Grade data lags loading data by n day
+
+Packages:
+MultivariateRandomForest
+IntegratedMRF
 
 
 
 
-### Notes
 
-**Emerging field: predicitve to prescriptive**
-https://arxiv.org/pdf/1402.5481.pdf
+### Optimisation
 
+**Predictive to prescriptive**
+ 
+Interesting reading: predicitve (machine learning) to prescriptive (operations research) 
+ 
+https://arxiv.org/pdf/1402.5481.pdf 
+ 
+https://www.funartech.com/approach/hybridization
+
+
+```{r ,echo=FALSE}
+# Include image
+knitr::include_graphics("Analyses.JPG")
+```
 
 Four pillars for the financial success of a block already in production: 
  
@@ -303,41 +337,33 @@ Four pillars for the financial success of a block already in production:
 (Extensive mine planning is performed by mining engineers and geologists to maximise the block that has been developed. Deviation from the compliance to mine less expensive, easier or higher grade ore deminishes the value of the Life of Mine (LoM) in the long run) 
 * Cash cost of production
 
-All the above mentioned pillars can be modelled as endogenous variables.
-
-The first goal will be to collect or generate all possible exogenous variables dogenous variables
+All the above mentioned pillars can be modelled as dependent variables.
 
 
-The model that has been elicited makes it possible to predict on hourly data. It will be put into production using SQLMachine learning services. The current hour's prediction will be based on the real-time quantities of the exogenous variables. 
-
-The remaining hours of the production day will be predicted using the last two rolling month's average for the quantity of operators and the quantity of LHDs for each hour on each weekday. The percentage extraction from each level and orientation will be based on the split of the called tonnes by the planner before each production day. Drilling meters by level will be actuals.   
+### Notes
 
 
 Improvement suggestion (Perhaps at CDM):
 Ore pass levels could be a significant variable to incorporate that potentially improves predictions as it is a sound representation of the ore handling system's performance and directly impact dumping ability if full. 
 
-**Update 202005021426**
-**Multiple multivariate regression**
-Include grade and compliance (available from March) as dependent variables
-Grade data lags loading data by n day
-
-Packages:
-MultivariateRandomForest
-IntegratedMRF
 
 **Include meters drilled by level**
 Covariate analyse on loading and grade to determine time frame for drilling data
 
 
 **Grade prediction**
-Build model and predict (data at tune level will be required at least)
+Build model and predict (data at tunnel level will be required at least)
+Grade will predicited on daily basis, but repredicitons will occur hourly for production day when model in production.
 
 
-Grade mapping
+Suggested dependent variables
 
 
 
 
+**Other**
+
+Minise loss function
 
 
 
