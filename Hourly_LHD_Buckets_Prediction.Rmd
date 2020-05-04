@@ -13,9 +13,11 @@ output:
 
 #### Background for projects
 
-Koffiefontein Diamond Mine (KDM) is a three tier sub-level cave operation based in the Free state province, South Africa. Recent developments at the mine has led to various technological systems being implemented rendering vast amounts of data. The mine utilises business Intelligence software, which is intuitive, but more descriptive than predictive. The idea of the projects, detailed in the tabs above, were to better understand the machine learning possibilities with incumbent data availability and quality. 
+Koffiefontein Diamond Mine (KDM) is a three tier sub-level cave operation based in the Free state province, South Africa. Recent developments at the mine has led to various technological systems being implemented rendering vast amounts of data. The mine utilises business intelligence software, which is intuitive, but more descriptive than predictive. The idea of the projects, detailed in the tabs above, were to better understand the machine learning possibilities with incumbent data availability and quality. 
  
 Predictive insights and variation of components influencing dependent variables give on-mine decision maker a better chance of control based on historically observed data. The aim of the projects were to fit supervised regression/classification models on the applicable, delineated, independent variables. After the optimal models were selected, the prediction algorithms were implemented into production. The dependent predictions and the independent variables were then displayed in the control room and on management dashboards for improved process control. 
+
+Hourly data for February and March 2020 were used for the modelling and predictions. The plan going forward is to automate the inclusion of all applicable hourly data into the ever-growing training dataset as they occur. Temporal data inclusion is imperative as it will be a key independent variables that represents the change in the minig block over time. The different models will than automatically retrain on a weekly basis and potentially improve their prediction capability.The ultimate aim of the projects are to move from the predictive to prescriptive space.
 
 #### Sub-level cave
 
@@ -32,7 +34,7 @@ knitr::include_graphics("KDM Levels.JPG")
 
 #### Packages utilised
 
-tidyr, caret, ranger, vtreat, xgboost, magrittr, ggplot2, dplyr, broom, knitr, rmarkdown
+tidyr, caret, ranger, vtreat, xgboost, magrittr, ggplot2, dplyr, broom, knitr, rmarkdown, MultivariateRandomForest
 
 #### Author
 **Jacques Swart** 
@@ -47,7 +49,7 @@ tidyr, caret, ranger, vtreat, xgboost, magrittr, ggplot2, dplyr, broom, knitr, r
 
 * Delineate best model that minimises the Root Mean Square Error (RMSE).
 * Put model into production using (near) real-time data so that relevant stakeholders have sight on hourly prediction  for the remaining shift and production day.
-* Push underperfroming independent variables to screens for process control.
+* Push under performing independent variables to screens for process control.
 
 #### Independent variables
 
@@ -57,11 +59,16 @@ Hourly data for February and March 2020:
 * Day of week
 * Number of operators underground
 * Number of LHDs Loading
-* 56 level West orientation loading percentage
-* 58 level East orientation loading percentage
-* 58 level RLT orientation loading percentage
-* 60 level East orientation loading percentage
-* 60 level West orientation loading percentage
+* Number of 56 level West tunnels loaded
+* Number of 58 level East tunnels loaded
+* Number of 58 level RLT tunnels loaded
+* Number of 60 level East tunnels loaded
+* Number of 60 level West tunnels loaded
+* 56 level West orientation loading fraction
+* 58 level East orientation loading fraction
+* 58 level RLT orientation loading fraction
+* 60 level East orientation loading fraction
+* 60 level West orientation loading fraction
 * 56 level ring meters drilled past month
 * 58 level ring meters drilled past month
 * 60 level ring meters drilled past month
@@ -320,7 +327,7 @@ IntegratedMRF
 
 **Predictive to prescriptive**
  
-Interesting reading: predicitve (machine learning) to prescriptive (operations research) 
+Interesting reading: predictive (machine learning) to prescriptive (operations research) 
  
 https://arxiv.org/pdf/1402.5481.pdf 
  
@@ -337,7 +344,7 @@ Four pillars for the financial success of a block already in production:
 * Amount of tonnes treated
 * Grade recovered
 * Draw compliance
-(Extensive mine planning is performed by mining engineers and geologists to maximise the block that has been developed. Deviation from the compliance to mine less expensive, easier or higher grade ore deminishes the value of the Life of Mine (LoM) in the long run) 
+(Extensive mine planning is performed by mining engineers and geologists to maximise the block that has been developed. Deviation from the compliance to mine less expensive, easier or higher grade ore diminishes the value of the Life of Mine (LoM) in the long run) 
 * Cash cost of production
 
 All the above mentioned pillars can be modelled as dependent variables.
@@ -356,7 +363,7 @@ Covariate analyse on loading and grade to determine time frame for drilling data
 
 **Grade prediction**
 Build model and predict (data at tunnel level will be required at least)
-Grade will predicited on daily basis, but repredicitons will occur hourly for production day when model in production.
+Grade will predicted on daily basis, but predictions will occur hourly for production day when model in production.
 
 
 Suggested dependent variables
@@ -366,7 +373,7 @@ Suggested dependent variables
 
 **Other**
 
-Minise loss function
+Minimise loss function
 
 
 
