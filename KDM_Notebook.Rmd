@@ -70,9 +70,9 @@ Hourly data for February and March 2020:
 * 58 level RLT orientation loading fraction
 * 60 level East orientation loading fraction
 * 60 level West orientation loading fraction
-* 56 level ring meters drilled past month
-* 58 level ring meters drilled past month
-* 60 level ring meters drilled past month
+* (56 level ring meters drilled past month: inclusion increased RMSE)
+* (58 level ring meters drilled past month: inclusion increased RMSE)
+* (60 level ring meters drilled past month: inclusion increased RMSE)
 * Ore pass levels (Not available)
 
 #### Dependent variable
@@ -89,20 +89,12 @@ Prepared in SQL using:
 
 
 
-
-
-
-
-Based on above information the final train data was prepared and loaded into the workspace.
-
 ```{r echo=TRUE}
 # Read train data and inspect (February 2020)
 KDMTrainCSV <- read.csv("~/GitHub/R/DataSets/KDMTrainCSV.csv")
 str(KDMTrainCSV)
 summary(KDMTrainCSV)
 ```
-
-
 
 
 
@@ -116,9 +108,9 @@ summary(KDMTrainCSV)
 # Understand correlation between variables
 library(corrplot)
 df<-as.matrix(KDMTrainCSV)
-dfPairs <- df[,2:11]
+dfPairs <- df[,2:16]
 dfPairs.cor<-cor(dfPairs)
-corrplot(dfPairs.cor,method="number")
+corrplot(dfPairs.cor,method="circle")
 ```
 
 
@@ -179,7 +171,7 @@ summarise(rmse=sqrt(mean(residual^2)))
 ```{r}
 # Model random forest
 library(ranger)
-set.seed(1)
+set.seed(5)
 formula <- KDMTrainCSV$Buckets~.-Instant
 model2 <- ranger(formula,KDMTrainCSV,num.trees=500,respect.unordered.factors = "order")
 # Predict on test data
@@ -198,7 +190,7 @@ library(xgboost)
 library(vtreat)
 set.seed(1)
 (outcome <- "Buckets")
-(vars <- c("Weekday", "Hour", "Operators", "LHDs", "X56.W","X58.E","X58.R","X60.E","X60.W"))
+(vars <- c("Weekday", "Hour", "Operators", "LHDs","FractionFrom56.W","FractionFrom58.E","FractionFrom58.R","FractionFrom60.E","FractionFrom60.W","DistinctTunnels56.W",  "DistinctTunnels58.E","DistinctTunnels58.R","DistinctTunnels60.E","DistinctTunnels60.W"))
 treatplan <- designTreatmentsZ(KDMTrainCSV,vars,verbose = FALSE)
 # Get the "clean" and "lev" variables from the scoreFrame
 (newvars <- treatplan %>%
@@ -231,7 +223,7 @@ ntrees.test  = which.min(test_rmse_mean))    # find the index of min(test_rmse_m
 
 Buckets_model_xgb <- xgboost(data = as.matrix(KDMTrainCSV.treat), # training data as matrix
 label = KDMTrainCSV$Buckets,  # column of outcomes
-nrounds = 24,       # number of trees to build
+nrounds = 19,       # number of trees to build
 objective = "reg:linear", # objective
 eta = 0.3,
 depth = 6,
@@ -285,14 +277,14 @@ ggplot(first_two_weeks, aes(x = Instant, y = value, color = valuetype, linetype 
   scale_color_brewer(palette = "Dark2") + 
   ggtitle("Predicted Two Weeks Buckets, Random Forest plot")
 
-# Specific day: 10 March 2020
+# Specific day: 9 March 2020
 Specific_day <- KDMTestCSV %>% 
   # Set start to 0, convert unit to days
   mutate(instant = (Instant - min(Instant))) %>% 
   # Gather Buckets and pred2 into a column named value with key valuetype
   gather(key = valuetype, value = value, Buckets, pred2) %>%
   # Filter for rows 
-  filter(Instant <= 10*24 & Instant > 9*24)
+  filter(Instant <= 9*24 & Instant > 8*24)
 
 #Plot predictions and Buckets by date/time 
 ggplot(Specific_day, aes(x = Instant, y = value, color = valuetype, linetype = valuetype)) + 
@@ -300,7 +292,7 @@ ggplot(Specific_day, aes(x = Instant, y = value, color = valuetype, linetype = v
   geom_line() + 
   scale_x_continuous("Hour", breaks = 0:14, labels = 0:14) + 
   scale_color_brewer(palette = "Dark2") + 
-  ggtitle("Predicted 10 March 2020 Buckets, Random Forest plot")
+  ggtitle("Predicted 9 March 2020 Buckets, Random Forest plot")
 
 ```
 
