@@ -1,5 +1,5 @@
 ---
-title: "Koffiefontein Diamond Mine Machine Learning Projects"
+title: "Koffiefontein Machine Learning Pilot Project"
 output:
   html_document:
       # toc: true
@@ -17,7 +17,7 @@ Koffiefontein Diamond Mine (KDM) is a three tier sub-level cave operation based 
  
 Predictive insights and variation of components influencing dependent variables give on-mine decision maker a better chance of control based on historically observed data. The aim of the projects were to fit supervised regression/classification models on the applicable, delineated, independent variables. After the optimal models were selected, the prediction algorithms were implemented into production. The dependent predictions and the independent variables were then displayed in the control room and on management dashboards for improved process control. 
 
-Hourly data for February and March 2020 were used for the modelling and predictions. The plan going forward is to automate the inclusion of all applicable hourly data into the ever-growing training dataset as they occur. Temporal data inclusion is imperative as it will be a key independent variable representing the change in the minig block over time. The different models will than automatically retrain on a weekly basis and potentially improve their prediction capability.The ultimate aim of the projects are to move from the predictive to prescriptive space.
+Hourly data for February and March 2019 were used for the modelling and predictions. The plan going forward is to automate the inclusion of all applicable hourly data into the ever-growing training dataset as they occur. Temporal data inclusion is imperative as it will be a key independent variable representing the change in the minig block over time. The different models will than automatically retrain on a weekly basis and potentially improve their prediction capability.The ultimate aim of the projects are to move from the predictive to prescriptive space.
 
 #### Sub-level cave
 
@@ -40,7 +40,7 @@ tidyr, caret, ranger, vtreat, xgboost, magrittr, ggplot2, dplyr, broom, knitr, r
 #### Author
 **Jacques Swart** 
 
-**Email address:** jacques.swart at petradiamonds dot com 
+**Email address:** Jacques.swart@petradiamonds.com 
 
 
 ### Loading
@@ -54,7 +54,7 @@ tidyr, caret, ranger, vtreat, xgboost, magrittr, ggplot2, dplyr, broom, knitr, r
 
 #### Independent variables
 
-Hourly data for February and March 2020:
+Hourly data for February and March 2019:
  
 * Hour of day
 * Day of week
@@ -70,9 +70,9 @@ Hourly data for February and March 2020:
 * 58 level RLT orientation loading fraction
 * 60 level East orientation loading fraction
 * 60 level West orientation loading fraction
-* (56 level ring meters drilled past month: inclusion increased RMSE, i.e overfitting)
-* (58 level ring meters drilled past month: inclusion increased RMSE, i.e overfitting)
-* (60 level ring meters drilled past month: inclusion increased RMSE, i.e overfitting)
+* 56 level ring meters drilled past month
+* 58 level ring meters drilled past month
+* 60 level ring meters drilled past month
 * Ore pass levels (Not available)
 
 #### Dependent variable
@@ -89,12 +89,20 @@ Prepared in SQL using:
 
 
 
+
+
+
+
+Based on above information the final train data was prepared and loaded into the workspace.
+
 ```{r echo=TRUE}
-# Read train data and inspect (February 2020)
+# Read train data and inspect (February 2019)
 KDMTrainCSV <- read.csv("~/GitHub/R/DataSets/KDMTrainCSV.csv")
 str(KDMTrainCSV)
 summary(KDMTrainCSV)
 ```
+
+
 
 
 
@@ -108,9 +116,9 @@ summary(KDMTrainCSV)
 # Understand correlation between variables
 library(corrplot)
 df<-as.matrix(KDMTrainCSV)
-dfPairs <- df[,2:16]
+dfPairs <- df[,2:11]
 dfPairs.cor<-cor(dfPairs)
-corrplot(dfPairs.cor,method="circle")
+corrplot(dfPairs.cor,method="number")
 ```
 
 
@@ -148,7 +156,7 @@ Models:
 * Model3 - XGBoost
 
 ```{r}
-# Test data as well (March 2020)
+# Test data as well (March 2019)
 KDMTestCSV <- read.csv("~/GitHub/R/DataSets/KDMTestCSV.csv")
 ```
 
@@ -171,7 +179,7 @@ summarise(rmse=sqrt(mean(residual^2)))
 ```{r}
 # Model random forest
 library(ranger)
-set.seed(5)
+set.seed(1)
 formula <- KDMTrainCSV$Buckets~.-Instant
 model2 <- ranger(formula,KDMTrainCSV,num.trees=500,respect.unordered.factors = "order")
 # Predict on test data
@@ -190,7 +198,7 @@ library(xgboost)
 library(vtreat)
 set.seed(1)
 (outcome <- "Buckets")
-(vars <- c("Weekday", "Hour", "Operators", "LHDs","FractionFrom56.W","FractionFrom58.E","FractionFrom58.R","FractionFrom60.E","FractionFrom60.W","DistinctTunnels56.W",  "DistinctTunnels58.E","DistinctTunnels58.R","DistinctTunnels60.E","DistinctTunnels60.W"))
+(vars <- c("Weekday", "Hour", "Operators", "LHDs", "X56.W","X58.E","X58.R","X60.E","X60.W"))
 treatplan <- designTreatmentsZ(KDMTrainCSV,vars,verbose = FALSE)
 # Get the "clean" and "lev" variables from the scoreFrame
 (newvars <- treatplan %>%
@@ -223,7 +231,7 @@ ntrees.test  = which.min(test_rmse_mean))    # find the index of min(test_rmse_m
 
 Buckets_model_xgb <- xgboost(data = as.matrix(KDMTrainCSV.treat), # training data as matrix
 label = KDMTrainCSV$Buckets,  # column of outcomes
-nrounds = 19,       # number of trees to build
+nrounds = 24,       # number of trees to build
 objective = "reg:linear", # objective
 eta = 0.3,
 depth = 6,
@@ -277,14 +285,14 @@ ggplot(first_two_weeks, aes(x = Instant, y = value, color = valuetype, linetype 
   scale_color_brewer(palette = "Dark2") + 
   ggtitle("Predicted Two Weeks Buckets, Random Forest plot")
 
-# Specific day: 9 March 2020
+# Specific day: 10 March 2019
 Specific_day <- KDMTestCSV %>% 
   # Set start to 0, convert unit to days
   mutate(instant = (Instant - min(Instant))) %>% 
   # Gather Buckets and pred2 into a column named value with key valuetype
   gather(key = valuetype, value = value, Buckets, pred2) %>%
   # Filter for rows 
-  filter(Instant <= 9*24 & Instant > 8*24)
+  filter(Instant <= 10*24 & Instant > 9*24)
 
 #Plot predictions and Buckets by date/time 
 ggplot(Specific_day, aes(x = Instant, y = value, color = valuetype, linetype = valuetype)) + 
@@ -292,152 +300,14 @@ ggplot(Specific_day, aes(x = Instant, y = value, color = valuetype, linetype = v
   geom_line() + 
   scale_x_continuous("Hour", breaks = 0:14, labels = 0:14) + 
   scale_color_brewer(palette = "Dark2") + 
-  ggtitle("Predicted 9 March 2020 Buckets, Random Forest plot")
+  ggtitle("Predicted 10 March 2019 Buckets, Random Forest plot")
 
 ```
 
 
 
-```{r eval=FALSE, include=FALSE}
-day_dif <- (KDMTestCSV)%>%
-mutate(res = Buckets -pred2)     %>% 
-filter(Instant <= 9*24 & Instant > 8*24)
 
-mapply(sum,day_dif[,16:20]) 
-
-```
-
-
-
-The models that have been elicited makes it possible to predict on hourly data. It will be put into production using SQLMachine learning services. The current hour's prediction will be based on the real-time quantities of the independent variables. 
+The model that has been inferred makes it possible to predict on hourly data. It will be put into production using SQLMachine learning services. The current hour's prediction will be based on the real-time quantities of the independent variables. 
 
 The remaining hours of the production day will be predicted using the last two rolling month's average for the quantity of operators and the quantity of LHDs for each hour on each weekday. The percentage extraction from each level and orientation will be based on the split of the called tonnes by the planner before each production day. Drilling meters by level will be actuals. 
-
-**Performance of the model will be discussed once operations are 100% operational again** 
-
-
-### Grade
-
-Loading is only one part of the equation. Grade prediction and ultimately precription of input variables to improve grade is very salient. Here it is imperative to note that the 
-
-Objectives for this project
-
-* Delineate best model that minimises the Root Mean Square Error (RMSE).
-* Put model into production using (near) real-time data so that relevant stakeholders have sight on daily prediction  for the production day.
-* Push under performing independent variables to screens for process control.
-
-#### Independent variables
-
-Hourly data for February and March 2020:
- 
-* Hour of day
-* Day of week
-* Number of operators underground
-* Number of LHDs Loading
-* Number of 56 level West tunnels loaded
-* Number of 58 level East tunnels loaded
-* Number of 58 level RLT tunnels loaded
-* Number of 60 level East tunnels loaded
-* Number of 60 level West tunnels loaded
-* 56 level West orientation loading fraction
-* 58 level East orientation loading fraction
-* 58 level RLT orientation loading fraction
-* 60 level East orientation loading fraction
-* 60 level West orientation loading fraction
-* 56 level ring meters drilled past month
-* 58 level ring meters drilled past month
-* 60 level ring meters drilled past month
-* Ore pass levels (Not available)
-
-#### Dependent variable
-
-* Daily Grade
-
-#### Data preparation
-
-Prepared in SQL using:
-
-	- Loading data table from underground LHD monitoring system 
-	- Employee scanner clocking System
-	- SQL-based production data
-
-
-
-
-
-
-### Multivariate
-
-**Update 20200504**
-Complete,  documenting in progress 
-
-
-**Multiple multivariate regression**
-Include grade and compliance (available from March) as dependent variables
-Grade data lags loading data by n day
-
-Packages:
-MultivariateRandomForest
-IntegratedMRF
-
-
-
-
-
-
-### Optimisation
-
-**Predictive to prescriptive**
- 
-Interesting reading: predictive (machine learning) to prescriptive (operations research) 
- 
-https://arxiv.org/pdf/1402.5481.pdf 
- 
-https://www.funartech.com/approach/hybridization
-
-
-```{r ,echo=FALSE}
-# Include image
-knitr::include_graphics("Analyses.JPG")
-```
-
-Four pillars for the financial success of a block already in production: 
- 
-* Amount of tonnes treated
-* Grade recovered
-* Draw compliance
-(Extensive mine planning is performed by mining engineers and geologists to maximise the block that has been developed. Deviation from the compliance to mine less expensive, easier or higher grade ore diminishes the value of the Life of Mine (LoM) in the long run) 
-* Cash cost of production
-
-All the above mentioned pillars can be modelled as dependent variables.
-
-
-### Notes
-
-
-Improvement suggestion (Perhaps at CDM):
-Ore pass levels could be a significant variable to incorporate that potentially improves predictions as it is a sound representation of the ore handling system's performance and directly impact dumping ability if full. 
-
-
-**Include meters drilled by level**
-Covariate analyse on loading and grade to determine time frame for drilling data
-
-
-**Grade prediction**
-Build model and predict (data at tunnel level will be required at least)
-Grade will predicted on daily basis, but predictions will occur hourly for production day when model in production.
-
-
-Suggested dependent variables
-
-
-
-
-**Other**
-
-Minimise loss function
-
-
-
-
 
